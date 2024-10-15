@@ -1,0 +1,32 @@
+<div
+  class="card h-100 shadow"
+  [ngClass]="{ border: post.active, 'border-success': post.active }"
+>
+  <div class="card-body d-flex flex-column justify-content-between">
+    <div class="mb-3 flex-grow-1">
+      <h5 class="card-title">{{ post.title }}</h5>
+      <p class="card-text text-truncate">{{ post.body }}</p>
+    </div>
+    <div class="my-3">
+      <span class="badge me-2" appRndmColor *ngFor="let tag of post.tags">{{
+        tag | uppercase
+      }}</span>
+    </div>
+    <div class="row row-cols-2 g-1">
+      <div class="col">
+        <a [routerLink]="['/detail', post.id]" class="btn btn-primary w-100"
+          >Dettagli</a
+        >
+      </div>
+      <div class="col">
+        <a class="btn btn-outline-primary w-100" (click)="openForm(post.id)"
+          >Edit</a
+        >
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <ng-content></ng-content>
+  </div>
+</div>

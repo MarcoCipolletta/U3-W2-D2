@@ -1,0 +1,102 @@
+<div class="container pb-5">
+  <h1 class="text-center">Homepage</h1>
+  <h3>In evidenza</h3>
+  <div *ngIf="featuredPost" class="row justify-content-center">
+    <div class="col-12 col-md-4">
+      <app-card [post]="featuredPost" (onFormRequest)="handleData($event)">
+        <form class="m-3" *ngIf="formOpenId === featuredPost.id">
+          <label for="title">Titolo</label>
+          <input
+            [(ngModel)]="changePost.title"
+            name="title"
+            type="text"
+            class="w-100"
+          />
+          <label for="body" class="mt-3">Body</label>
+          <textarea
+            [(ngModel)]="changePost.body"
+            name="body"
+            class="w-100"
+            rows="4"
+            cols="50"
+          ></textarea>
+          <div class="d-flex justify-content-end mt-2">
+            <button (click)="handleData(changePost.id)" class="btn btn-warning">
+              Modifica Post
+            </button>
+          </div>
+        </form>
+      </app-card>
+    </div>
+  </div>
+  <h3 class="mt-5">Potrebbero Piacerti</h3>
+  <div *ngIf="relatedPosts" class="row g-3">
+    <div *ngFor="let post of relatedPosts" class="col-12 col-md-3">
+      <app-card [post]="post" (onFormRequest)="handleData($event)">
+        <form class="m-3" *ngIf="formOpenId === post.id">
+          <label for="title">Titolo</label>
+          <input
+            [(ngModel)]="changePost.title"
+            name="title"
+            type="text"
+            class="w-100"
+          />
+          <label for="body" class="mt-3">Body</label>
+          <textarea
+            [(ngModel)]="post.body"
+            name="body"
+            class="w-100"
+            rows="4"
+            cols="50"
+          ></textarea>
+          <div class="d-flex justify-content-end mt-2">
+            <button (click)="handleData(post.id)" class="btn btn-warning">
+              Modifica Post
+            </button>
+          </div>
+        </form>
+      </app-card>
+    </div>
+  </div>
+  <h3 class="mt-5">Tutti i post</h3>
+  <div *ngIf="tagsArr.length > 0" class="my-3">
+    <span
+      class="badge me-2"
+      [ngClass]="{
+        'text-bg-success': activeTag === tag,
+        'text-bg-secondary': activeTag !== tag
+      }"
+      *ngFor="let tag of tagsArr"
+      (click)="filtraPost(tag)"
+      >{{ tag | uppercase }}</span
+    >
+  </div>
+  <div *ngIf="relatedPosts" class="row g-3">
+    <div *ngFor="let post of filteredPosts" class="col-12 col-md-3">
+      <app-card [post]="post" (onFormRequest)="handleData($event)">
+        <form class="m-3" *ngIf="formOpenId === post.id">
+          <label for="title">Titolo</label>
+          <input
+            [(ngModel)]="changePost.title"
+            name="title"
+            type="text"
+            class="w-100"
+          />
+          <label for="body" class="mt-3">Body</label>
+          <textarea
+            [(ngModel)]="post.body"
+            name="body"
+            class="w-100"
+            rows="4"
+            cols="50"
+          ></textarea>
+          <div class="d-flex justify-content-end mt-2">
+            <button (click)="handleData(post.id)" class="btn btn-warning">
+              Modifica Post
+            </button>
+          </div>
+        </form>
+      </app-card>
+    </div>
+  </div>
+</div>

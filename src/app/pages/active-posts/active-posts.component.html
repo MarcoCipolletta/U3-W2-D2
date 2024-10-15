@@ -1,0 +1,8 @@
+<div class="container">
+  <h1 class="text-center my-3">Active Post</h1>
+  <div *ngIf="activePost" class="row row-cols-1 row-cols-md-4 g-3">
+    <div class="col" *ngFor="let post of activePost">
+      <app-card [post]="post"></app-card>
+    </div>
+  </div>
+</div>
